@@ -1,4 +1,7 @@
 {
+  "stats": {
+    "vulnerabilityCount": 104
+  },
   "ctf": [
     {
       "id": "ctf-beginner-tools",

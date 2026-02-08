@@ -588,43 +588,52 @@ document.addEventListener('click', function(e) {
 });
 
 // ==========================================
-// 獲取漏洞數量 - 從後端 API 獲取最新的漏洞通報數量
+// 獲取漏洞數量 - 從 config.json 取得並以滾動動畫顯示
 // ==========================================
 
 function fetchVulnerabilityCount() {
   const countElement = document.getElementById('vulnerability-count');
-  
   if (!countElement) return;
-  
-  // 方案：使用 CORS Proxy 爬取 HITCON ZeroDay 個人頁面
-  // 由於直接跨域請求會被阻擋，這裡使用備用方案
-  const corsProxy = 'https://cors-anywhere.herokuapp.com/';
-  const zeroday_url = 'https://zeroday.hitcon.org/user/Timmy_3428/vulnerability';
-  
-  fetch(corsProxy + zeroday_url, {
-    headers: {
-      'X-Requested-With': 'XMLHttpRequest'
-    }
-  })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('無法獲取頁面');
-      }
-      return response.text();
-    })
-    .then(html => {
-      // 使用正規表達式提取漏洞數量
-      // 頁面應該包含類似 "104 vulnerabilities" 的內容
-      const match = html.match(/(\d+)\s+(?:vulnerabilities?|漏洞)/i);
-      if (match && match[1]) {
-        const count = match[1];
-        countElement.textContent = count;
-        console.log(`✅ 成功獲取漏洞通報數量: ${count}`);
-      }
+
+  // 從 config.json 讀取最新漏洞數量
+  fetch('articles/config.json')
+    .then(response => response.json())
+    .then(config => {
+      const target = (config.stats && config.stats.vulnerabilityCount) || 104;
+      animateCount(countElement, target);
+      console.log(`✅ 漏洞通報數量: ${target}`);
     })
     .catch(error => {
-      console.warn('⚠️ 無法自動獲取漏洞數量，使用本地存儲的數值', error);
-      // 失敗時保留原有的數值（預設為 104）
+      // 若讀取失敗，使用 HTML 中的預設值並播放動畫
+      console.warn('⚠️ 無法讀取 config.json，使用預設值', error);
+      const fallback = parseInt(countElement.textContent, 10) || 104;
+      animateCount(countElement, fallback);
     });
+}
+
+// 數字滾動動畫
+function animateCount(element, target) {
+  const duration = 1500; // 動畫時長 1.5 秒
+  const start = 0;
+  const startTime = performance.now();
+
+  function update(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+
+    // easeOutExpo 緩動函數，讓數字快速上升後緩慢到達
+    const easeOut = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+    const current = Math.floor(start + (target - start) * easeOut);
+
+    element.textContent = current;
+
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    } else {
+      element.textContent = target;
+    }
+  }
+
+  requestAnimationFrame(update);
 }
 
