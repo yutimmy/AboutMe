@@ -26,6 +26,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // 初始化文章按鈕事件委託
   initArticleButtons();
   
+  // 獲取最新的漏洞通報數量
+  fetchVulnerabilityCount();
+  
   // 預設顯示主頁
   showPage('home');
 });
@@ -583,3 +586,45 @@ document.addEventListener('click', function(e) {
     closeClassModal();
   }
 });
+
+// ==========================================
+// 獲取漏洞數量 - 從後端 API 獲取最新的漏洞通報數量
+// ==========================================
+
+function fetchVulnerabilityCount() {
+  const countElement = document.getElementById('vulnerability-count');
+  
+  if (!countElement) return;
+  
+  // 方案：使用 CORS Proxy 爬取 HITCON ZeroDay 個人頁面
+  // 由於直接跨域請求會被阻擋，這裡使用備用方案
+  const corsProxy = 'https://cors-anywhere.herokuapp.com/';
+  const zeroday_url = 'https://zeroday.hitcon.org/user/Timmy_3428/vulnerability';
+  
+  fetch(corsProxy + zeroday_url, {
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest'
+    }
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('無法獲取頁面');
+      }
+      return response.text();
+    })
+    .then(html => {
+      // 使用正規表達式提取漏洞數量
+      // 頁面應該包含類似 "104 vulnerabilities" 的內容
+      const match = html.match(/(\d+)\s+(?:vulnerabilities?|漏洞)/i);
+      if (match && match[1]) {
+        const count = match[1];
+        countElement.textContent = count;
+        console.log(`✅ 成功獲取漏洞通報數量: ${count}`);
+      }
+    })
+    .catch(error => {
+      console.warn('⚠️ 無法自動獲取漏洞數量，使用本地存儲的數值', error);
+      // 失敗時保留原有的數值（預設為 104）
+    });
+}
+
