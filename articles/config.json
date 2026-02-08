@@ -1,0 +1,32 @@
+{
+  "ctf": [
+    {
+      "id": "ctf-beginner-tools",
+      "file": "ctf-beginner-tools.md",
+      "title": "CTF 新手工具與練習網站總覽",
+      "type": "Guide",
+      "preview": "給完全新手的 CTF 入門：常用工具、靶場與學習路線整理"
+    }
+  ],
+  "zeroday": [],
+  "reading": [
+    {
+      "id": "the-highest-rest-method",
+      "file": "the-highest-rest-method.md",
+      "title": "最高休息法",
+      "type": "心理學",
+      "author": "久賀谷亮",
+      "readTime": "2小時42分21秒",
+      "preview": "打破休息就是睡覺的迷思，透過正念實踐讓大腦獲得真正休息..."
+    }
+  ],
+  "class": [
+    {
+      "id": "mysql-student-course",
+      "file": "mysql-student-course.md",
+      "title": "MySQL 入門：學生選課系統實作筆記",
+      "type": "Database",
+      "preview": "建立學生、課程、選課關係的三表實作，含查詢與清空流程"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+# 環境變數（敏感資料）
+.env
+
+# 編輯器設定
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node.js（如果使用）
+node_modules/
+package-lock.json
+npm-debug.log
+
+# 系統檔案
+.DS_Store
+Thumbs.db
+
+# 臨時檔案
+*.tmp
+*.bak
+*.log

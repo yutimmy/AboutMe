@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>個人介紹網站 🐶 - 膽小狗英雄風格</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <!-- ========================================
+       導航列
+       ======================================== -->
+  <nav>
+    <ul>
+      <li><a href="#" data-page="home" class="active"> 主頁</a></li>
+      <li><a href="#" data-page="ctf"> CTF Writeup</a></li>
+      <li><a href="#" data-page="zeroday"> ZeroDay 漏洞</a></li>
+      <li><a href="#" data-page="reading"> 課外書讀書心得</a></li>
+      <li><a href="#" data-page="class"> 上課筆記</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    
+    <!-- ========================================
+         側邊欄 - 頭像 & 個人資訊
+         ======================================== -->
+    <aside class="sidebar">
+      <div class="avatar-section">
+        <img src="assets/images/S__12845255.jpg" alt="個人頭像" class="avatar">
+        <h3 style="margin: 1rem 0 0.5rem 0; border: none; display: block;">YU</h3>
+        <p class="bio-text"> 資安愛好者 | CTF Player | 漏洞獵人</p>
+      </div>
+
+      <div class="sidebar-stats">
+        <div class="stat-item">
+          <div class="stat-number">104</div>
+          <div class="stat-label">漏洞通報</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Post</div>
+        </div>
+      </div>
+
+    </aside>
+
+    <main>
+    <!-- ========================================
+         主頁 (Home)
+         ======================================== -->
+    <div id="home" class="page active">
+      <h1>Yu's Blog</h1>
+      
+      <div class="card highlight">
+        <p style="font-size: 1.05rem; line-height: 1.8;">
+          你好！歡迎來到我的個人部落格。我是一位熱情的資安愛好者，致力於在網路安全領域不斷學習與成長。
+        </p>
+        <p style="margin-top: 1rem;">
+          就像膽小狗英雄一樣，雖然有時候會害怕，但面對挑戰時總是會勇敢地站出來！
+          這個部落格展示了我的 <strong>漏洞挖掘經驗</strong>、<strong>CTF 解題紀錄</strong> 和 <strong>資安研究心得</strong>。
+        </p>
+      </div>
+
+      <!-- 資安能力與經驗 -->
+      <div class="card accent-left">
+        <h3>資安能力與經驗</h3>
+        <ul>
+          <li>
+            通報 <strong>HITCON ZeroDay 100+ 漏洞</strong>
+            <div class="skill-container">
+              <span class="skill-badge">XSS</span>
+              <span class="skill-badge">SQL Injection</span>
+              <span class="skill-badge">.Git Leak</span>
+              <span class="skill-badge">認證繞過</span>
+            </div>
+          </li>
+          <li>具有實戰漏洞挖掘經驗與測試方法論</li>
+        </ul>
+      </div>
+
+      <!-- 專案經驗 -->
+      <div class="card accent-left">
+        <h3>專案經驗</h3>
+        <ul>
+          <li>已完成 <strong>3 個獨立專案</strong>（含設計、實作、測試）</li>
+          <li>具備全棧開發能力（前端 + 後端）</li>
+          <li>熟悉版本控制、測試流程、文件撰寫</li>
+        </ul>
+      </div>
+
+      <!-- 證照與學習歷程 -->
+      <div class="card accent-left">
+        <h3>證照與學習歷程</h3>
+        <p><strong>已取得：</strong></p>
+        <div class="skill-container">
+          <span class="skill-badge">Microsoft AI-900</span>
+          <span class="skill-badge">ITS Python</span>
+        </div>
+        
+        <p style="margin-top: 1rem;"><strong>目前準備中：</strong></p>
+        <div class="skill-container">
+          <span class="skill-badge">CEH</span>
+          <span class="skill-badge">Network+</span>
+        </div>
+      </div>
+
+    </div>
+
+      <!-- ========================================
+           CTF Writeup 分頁
+           ======================================== -->
+      <div id="ctf" class="page">
+        <h1>CTF Writeup 解題紀錄</h1>
+        
+        <div id="ctf-list" class="writeup-list">
+          <!-- CTF 文章會在這裡動態載入 -->
+        </div>
+
+      </div>
+
+      <!-- ========================================
+           ZeroDay 漏洞分頁
+           ======================================== -->
+      <div id="zeroday" class="page">
+        <h1>HITCON ZeroDay 漏洞紀錄</h1>
+        
+        <div id="zeroday-list" class="zeroday-list">
+          <!-- ZeroDay 文章會在這裡動態載入 -->
+        </div>
+
+      </div>
+
+      <!-- ========================================
+           課外書讀書心得分頁
+           ======================================== -->
+      <div id="reading" class="page">
+        <h1>課外書讀書心得</h1>
+        
+        <div id="reading-list" class="reading-list">
+          <!-- 讀書心得會在這裡動態載入 -->
+        </div>
+
+      </div>
+
+      <!-- ========================================
+           上課筆記分頁
+           ======================================== -->
+      <div id="class" class="page">
+        <h1>上課筆記</h1>
+        
+        <div id="class-list" class="class-list">
+          <!-- 上課筆記會在這裡動態載入 -->
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ========================================
+       模態框 - Writeup 詳細內容
+       ======================================== -->
+  <div id="writeup-modal" class="modal">
+    <div class="modal-content" id="writeup-modal-content">
+      <!-- 動態載入的內容 -->
+    </div>
+  </div>
+
+  <!-- ========================================
+       模態框 - ZeroDay 詳細內容
+       ======================================== -->
+  <div id="zeroday-modal" class="modal">
+    <div class="modal-content" id="zeroday-modal-content">
+      <!-- 動態載入的內容 -->
+    </div>
+  </div>
+
+  <!-- ========================================
+       模態框 - 讀書心得詳細內容
+       ======================================== -->
+  <div id="reading-modal" class="modal">
+    <div class="modal-content" id="reading-modal-content">
+      <!-- 動態載入的內容 -->
+    </div>
+  </div>
+
+  <!-- ========================================
+       模態框 - 上課筆記詳細內容
+       ======================================== -->
+  <div id="class-modal" class="modal">
+    <div class="modal-content" id="class-modal-content">
+      <!-- 動態載入的內容 -->
+    </div>
+  </div>
+
+  <!-- ========================================
+       頁腳
+       ======================================== -->
+  <footer>
+    <p>© 2026 個人介紹網站 🐶 | 膽小狗英雄風格</p>
+  </footer>
+
+  <!-- 載入主程式 -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
+
