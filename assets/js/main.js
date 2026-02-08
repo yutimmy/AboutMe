@@ -43,6 +43,7 @@ function initNavigation() {
   const navLinks = document.querySelectorAll('nav a');
   const hamburgerBtn = document.getElementById('hamburger-menu');
   const navMenu = document.getElementById('nav-menu');
+  const navBrand = document.getElementById('nav-brand');
 
   hamburgerBtn.addEventListener('click', function (e) {
     e.stopPropagation();
@@ -69,6 +70,20 @@ function initNavigation() {
       navMenu.classList.remove('active');
     }
   });
+
+  // 品牌名點擊回主頁
+  if (navBrand) {
+    navBrand.addEventListener('click', function (e) {
+      e.preventDefault();
+      showPage('home');
+      navLinks.forEach(l => l.classList.remove('active'));
+      const homeLink = document.querySelector('nav a[data-page="home"]');
+      if (homeLink) homeLink.classList.add('active');
+      hamburgerBtn.classList.remove('active');
+      navMenu.classList.remove('active');
+      syncBottomBar('home');
+    });
+  }
 }
 
 function showPage(pageId) {
@@ -137,11 +152,49 @@ function initMobileProfile() {
     panel.classList.remove('active');
     overlay.classList.remove('active');
     document.body.style.overflow = '';
+    panel.style.transform = '';
   }
 
   btn.addEventListener('click', openPanel);
   overlay.addEventListener('click', closePanel);
   if (closeBtn) closeBtn.addEventListener('click', closePanel);
+
+  // 手勢下滑關閉面板
+  let startY = 0;
+  let currentY = 0;
+  let isDragging = false;
+
+  panel.addEventListener('touchstart', function (e) {
+    // 只在面板頂部才允許下拉關閉
+    if (panel.scrollTop <= 0) {
+      startY = e.touches[0].clientY;
+      isDragging = true;
+    }
+  }, { passive: true });
+
+  panel.addEventListener('touchmove', function (e) {
+    if (!isDragging) return;
+    currentY = e.touches[0].clientY;
+    const diff = currentY - startY;
+    if (diff > 0) {
+      panel.style.transform = `translateY(${diff}px)`;
+      panel.style.transition = 'none';
+    }
+  }, { passive: true });
+
+  panel.addEventListener('touchend', function () {
+    if (!isDragging) return;
+    isDragging = false;
+    panel.style.transition = '';
+    const diff = currentY - startY;
+    if (diff > 80) {
+      closePanel();
+    } else {
+      panel.style.transform = '';
+    }
+    startY = 0;
+    currentY = 0;
+  }, { passive: true });
 }
 
 // ==========================================
