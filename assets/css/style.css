@@ -530,6 +530,7 @@ main {
   line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   word-break: break-word;
@@ -1348,6 +1349,7 @@ footer a:hover { opacity: 0.8; }
   .hn-news-title {
     font-size: 0.87rem;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
 
   .hn-news-meta {
@@ -1396,6 +1398,7 @@ footer a:hover { opacity: 0.8; }
     font-size: 0.85rem;
     line-height: 1.5;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
