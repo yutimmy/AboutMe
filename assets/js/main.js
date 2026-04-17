@@ -613,12 +613,12 @@ function fetchVulnerabilityCount() {
   fetch('articles/config.json')
     .then(res => res.json())
     .then(config => {
-      const target = (config.stats && config.stats.vulnerabilityCount) || 104;
+      const target = (config.stats && config.stats.vulnerabilityCount) || 140;
       animateCount(countElement, target);
       if (mobileCountEl) mobileCountEl.textContent = target;
     })
     .catch(() => {
-      const fallback = parseInt(countElement.textContent, 10) || 104;
+      const fallback = parseInt(countElement.textContent, 10) || 140;
       animateCount(countElement, fallback);
       if (mobileCountEl) mobileCountEl.textContent = fallback;
     });
